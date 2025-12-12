@@ -20,21 +20,27 @@ class TransactionUtils {
       .join(', ');
 }
 
-  static String buildConsigneeAddress(Transaction item,
+  static String? buildConsigneeAddress(Transaction item,
       {bool cityLevel = false}) {
-    return cleanAddress(cityLevel
-        ? [item.consigneeCity, item.consigneeProvince]
-        : [
-            item.consigneeStreet,
-            item.consigneeBarangay,
-            item.consigneeCity,
-            item.consigneeProvince
-          ]);
+    // routeType rules ONLY for PL leg
+  
+
+  // otherwise: normal consignee address
+  return cleanAddress(cityLevel
+      ? [item.consigneeCity, item.consigneeProvince]
+      : [
+          item.consigneeStreet,
+          item.consigneeBarangay,
+          item.consigneeCity,
+          item.consigneeProvince
+        ]);
   }
 
-  static String buildShipperAddress(Transaction item,
+  static String? buildShipperAddress(Transaction item,
       {bool cityLevel = false}) {
-    return cleanAddress(cityLevel
+       
+        
+      return cleanAddress(cityLevel
         ? [item.shipperCity, item.shipperProvince]
         : [
             item.shipperStreet,
@@ -61,10 +67,19 @@ class TransactionUtils {
   static List<Transaction> expandTransaction(
       Transaction item, String driverId) {
     if (item.dispatchType == "ot") {
-      final shipperOrigin = buildShipperAddress(item);
-      final shipperDestination = cleanAddress([item.destination]);
 
-      
+     final shipperOrigin = (item.landTransport == "transport" &&
+        (item.routeType == null || item.routeType!.isEmpty || item.routeType != "pick-up"))
+    ? item.originPort
+    : buildShipperAddress(item);
+
+    final shipperDestination = (item.landTransport == "transport")
+    ? ((item.routeType != null && item.routeType!.isNotEmpty && item.routeType != "pick-up")
+        ? buildShipperAddress(item) ?? ''   // delivery or other → fall back to shipper address
+        : item.originPort ?? '')             // pick-up or empty routeType → origin port
+    : cleanAddress([item.destination]);       // not transport → normal destination
+
+          
 
       return [
         if (item.deTruckDriverName == driverId)

@@ -61,8 +61,8 @@ class TransactionHelpers {
 
   static String descriptionMsg(Transaction item) {
     return item.landTransport == 'transport'
-        ? 'Deliver Laden Container to Consignee'
-        : 'Pickup Laden Container from Shipper';
+        ? 'Deliver Goods to Consignee'
+        : 'Pickup Goods Container from Shipper';
   }
 
   static String newName(Transaction item) {

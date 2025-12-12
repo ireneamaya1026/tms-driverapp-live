@@ -86,10 +86,10 @@ class HomePage extends ConsumerWidget {
       child: Scaffold(
         appBar: AppBar(
           iconTheme: const IconThemeData(color: mainColor),
-          title: Image.asset(
-            'assets/Yello X.png',
-            height: 40,
-          ),
+          // title: Image.asset(
+          //   'assets/agri_logo.png',
+          //   height: 40,
+          // ),
           backgroundColor: const Color.fromARGB(255, 255, 255, 255),
           centerTitle: true,
           actions: [
@@ -120,13 +120,13 @@ class HomePage extends ConsumerWidget {
                           Row(
                             children: [
                               Image.asset(
-                                'assets/xlogo.png',
+                                'assets/agri_logo.png',
                                 width: 50,
                                 height: 50,
                               ),
                               const SizedBox(width: 12),
                               Text(
-                                'YXE Driver App',
+                                'TMS',
                                 style: AppTextStyles.title.copyWith(
                                   fontWeight: FontWeight.bold,
                                   color: mainColor,
@@ -273,7 +273,7 @@ class HomePage extends ConsumerWidget {
                               height: 50,
                             )
                           : Image.asset(
-                              'assets/xlogo.png',
+                              'assets/agri_logo.png',
                               fit: BoxFit.cover,
                               width: 50,
                               height: 50,

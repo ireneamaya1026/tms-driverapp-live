@@ -394,8 +394,11 @@ class _HomepageScreenState extends ConsumerState<HomepageScreen> {
                                                           maxLines: 2,
                                                         ),
                                                         const SizedBox(height: 8),
+                                                        if(item.landTransport != "transport")
                                                         Row(
+                                                          
                                                           children: [
+                                                            // if(transaction.landTransport == "transport")
                                                             Text(
                                                               "Bkg Ref. No.: ",
                                                               style: AppTextStyles.caption.copyWith(

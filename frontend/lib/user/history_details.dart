@@ -57,6 +57,7 @@ class _HistoryDetailState extends ConsumerState<HistoryDetailScreen> {
 
       
   }
+  
 
   @override
   void initState() {
@@ -169,6 +170,13 @@ Future<void> _fetchHistoryDetails() async {
   final Map<String, dynamic> scheduleMap = TransactionUtils.getScheduleForTransaction(transaction!, driverId, widget.transaction?.requestNumber);
   final expandedList = TransactionUtils.expandTransaction(transaction, driverId);
   final openedRequestNumber = widget.transaction?.requestNumber;
+  final bool showTab0 = transaction.landTransport != "transport";
+
+  final List<String> visibleTabs = [
+    if (showTab0) tabTitles[0],
+    tabTitles[1],
+  ];
+
 
  
 
@@ -226,7 +234,7 @@ Future<void> _fetchHistoryDetails() async {
                 padding: const EdgeInsets.all(14.0), // Add padding inside the container
                 
                 decoration: BoxDecoration(
-                  color: (widget.transaction?.requestStatus == 'Completed') ? const Color.fromARGB(255, 45, 144,111) : (widget.transaction?.stageId == 'Cancelled') ?  Colors.red[500] : Colors.grey, // Background color based on status
+                  color: (widget.transaction?.requestStatus == 'Completed' || widget.transaction?.requestStatus == 'Ongoing') ? const Color.fromARGB(255, 45, 144,111) : (widget.transaction?.stageId == 'Cancelled') ?  Colors.red[500] : Colors.grey, // Background color based on status
                   borderRadius: BorderRadius.circular(20.0), // Rounded edges
                 ),
                 
@@ -290,15 +298,18 @@ Future<void> _fetchHistoryDetails() async {
       Text(
         (() {
          print("isReassigned: ${widget.transaction?.isReassigned}");
+         print("Status: ${widget.transaction?.requestStatus}");
 
           if (widget.transaction?.isReassigned == true &&
               (widget.transaction?.reassigned?.isNotEmpty ?? false)) {
             return formatDateTime(widget.transaction!.reassigned!.first.createDate);
           } 
           // ✅ Completed or stage completed
-          else if (widget.transaction?.requestStatus == 'Completed' ) {
+          else if (widget.transaction?.requestStatus == 'Completed' || widget.transaction?.requestStatus == 'Ongoing' ) {
             final completedDate = widget.transaction?.completedTime;
             final deliveryActual = scheduleMap['delivery']?.actualDatetime;
+
+            print("Delivery: $deliveryActual" );
 
             if (completedDate != null && completedDate.isNotEmpty) {
               return formatDateTime(completedDate);
@@ -330,7 +341,7 @@ Future<void> _fetchHistoryDetails() async {
           if (widget.transaction?.isReassigned == true &&
               (widget.transaction?.reassigned?.isNotEmpty ?? false)) {
             return 'Reassigned Date';
-          } else if (widget.transaction?.requestStatus == 'Completed' ) {
+          } else if (widget.transaction?.requestStatus == 'Completed' || widget.transaction?.requestStatus == 'Ongoing' ) {
             return 'Completed Date';
           } else if (widget.transaction?.stageId == 'Cancelled') {
             return 'Cancelled Date';
@@ -388,61 +399,55 @@ Future<void> _fetchHistoryDetails() async {
 
                   )
                 ) : Column(
-                  children: [
-                    Row(
-                        children: List.generate(tabTitles.length, (index) {
-                    final bool isSelected = _expandedTabIndex == index;
-                    
+  children: [
+    Row(
+      children: List.generate(visibleTabs.length, (visIndex) {
+        final bool isSelected = _expandedTabIndex == visIndex;
+        final Color tabColor = isSelected ? mainColor : bgColor;
 
-                    final Color tabColor = isSelected ? mainColor : bgColor;
-
-
-                    return Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                          // WidgetsBinding.instance.addPostFrameCallback((_) {
-                            setState(() {
-                              if(_expandedTabIndex == index) {
-                                _expandedTabIndex = null;
-                              } else {
-                                _expandedTabIndex = index;
-                              }
-                            });
-                          // });
-                          
-                        },
-                        child: Container (
-                          padding: const EdgeInsets.symmetric(vertical: 12),
-                          margin: const EdgeInsets.symmetric(horizontal: 4),
-                          decoration: BoxDecoration(
-                            border: Border (
-                              bottom: BorderSide(
-                                color: tabColor,
-                                width: 2,
-                              ),
-                            ),
-                          ),
-                          alignment: Alignment.center,
-                          child: Text(
-                            tabTitles[index],
-                            style: AppTextStyles.body.copyWith(
-                              color:  tabColor,
-                              fontWeight: FontWeight.bold
-                            ),
-                          ),
-                        ),
-                      ),
-                    );
-                  }),
+        return Expanded(
+          child: GestureDetector(
+            onTap: () {
+              setState(() {
+                if (_expandedTabIndex == visIndex) {
+                  _expandedTabIndex = null;
+                } else {
+                  _expandedTabIndex = visIndex;
+                }
+              });
+            },
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              margin: const EdgeInsets.symmetric(horizontal: 4),
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    color: tabColor,
+                    width: 2,
+                  ),
                 ),
-                const SizedBox(height: 16),
-            
-                if (_expandedTabIndex == 0) _buildFreightTab(),
-                if (_expandedTabIndex == 1) _buildShipConsTab(),
+              ),
+              alignment: Alignment.center,
+              child: Text(
+                visibleTabs[visIndex],
+                style: AppTextStyles.body.copyWith(
+                    color: tabColor, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+        );
+      }),
+    ),
 
-                const SizedBox(height: 20),
-              ],
-            )
+    const SizedBox(height: 16),
+
+    // CONTENT
+    if (_expandedTabIndex == 0 && showTab0) _buildFreightTab(),
+    if (_expandedTabIndex == (showTab0 ? 1 : 0)) _buildShipConsTab(),
+
+    const SizedBox(height: 20),
+  ],
+)
           ]
                   
    
@@ -557,7 +562,7 @@ Future<void> _fetchHistoryDetails() async {
         String tempName =transaction.deReleasedBy ?? '';
         String tempYardActualDate = formatDateTime(pickup?.actualDatetime);
         String tempActualDate = formatDateTime(delivery?.actualDatetime);
-        String tempYardTitle = "Yard/Port";
+        String tempYardTitle = "Market";
         String tempTitle = "Consignee";
         
 
@@ -578,7 +583,7 @@ Future<void> _fetchHistoryDetails() async {
         String tempYardActualDate = formatDateTime(pickup?.actualDatetime);
         String tempActualDate = formatDateTime(delivery?.actualDatetime);
         String tempYardTitle = "Consignee";
-        String tempTitle = "Yard/Port";
+        String tempTitle = "Market";
 
         if (isDiverted && consolStatus == 'draft') {
           yardSignBase64 = tempSign;
@@ -607,7 +612,7 @@ Future<void> _fetchHistoryDetails() async {
           name =transaction.deReleasedBy;
           yardactualdate = formatDateTime(pickup?.actualDatetime);
           actualdate = formatDateTime(delivery?.actualDatetime);
-          yardtitle = "Yard/Port";
+          yardtitle = "Market";
           title = "Shipper";
 
         } else if (widget.transaction?.requestNumber == transaction.plRequestNumber) {
@@ -618,7 +623,7 @@ Future<void> _fetchHistoryDetails() async {
           yardactualdate = formatDateTime(pickup?.actualDatetime);
           actualdate = formatDateTime(delivery?.actualDatetime);
           yardtitle = "Shipper";
-          title = "Yard/Port";
+          title = "Market";
         }
       }
 
@@ -631,7 +636,7 @@ Future<void> _fetchHistoryDetails() async {
         String tempName = transaction.deReleasedBy ?? '';
         String tempYardActualDate = formatDateTime(pickup?.actualDatetime);
         String tempActualDate = formatDateTime(delivery?.actualDatetime);
-        String tempYardTitle = "Yard/Port";
+        String tempYardTitle = "Market";
         String tempTitle = "Shipper";
 
         if (isDiverted && consolStatus == 'draft') {
@@ -661,7 +666,7 @@ Future<void> _fetchHistoryDetails() async {
         String tempYardActualDate = formatDateTime(pickup?.actualDatetime);
         String tempActualDate = formatDateTime(delivery?.actualDatetime);
         String tempYardTitle = "Shipper";
-        String tempTitle = "Yard/Port";
+        String tempTitle = "Market";
 
        
           yardSignBase64 = tempSign;

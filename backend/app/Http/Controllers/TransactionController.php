@@ -19,10 +19,10 @@ use Carbon\Carbon;
 
 class TransactionController extends Controller
 {
-    protected $url = "https://jralejandria-alpha-dev-yxe.odoo.com";
-    protected $db = 'jralejandria-alpha-dev-yxe1-production-alpha-24944074';
-    // protected $odoo_url = "http://192.168.76.205:8080/odoo/jsonrpc";
-    protected $odoo_url = "https://jralejandria-alpha-dev-yxe.odoo.com/jsonrpc";
+    protected $url = "https://odootms-tms-car-da.odoo.com";
+    protected $db = 'odootms-tms-car-da-tms-car-da-prod-26358238';
+    // protected $odoo_url = "https://tms-driver-app.gothong.com/odoo/jsonrpc";
+    protected $odoo_url = "https://odootms-tms-car-da.odoo.com/jsonrpc";
 
 
 
@@ -277,11 +277,18 @@ class TransactionController extends Controller
 
             $sales_invoice_filename = isset($images['Sales Invoice']['filename']) ? $images['Sales Invoice']['filename'] : null;
 
-            $stock_transfer = isset($images['Stock Transfer']['content']) && $images['Stock Transfer']['content'] !== null 
-                ? $images['Stock Transfer']['content'] 
-                : null;
+            if (!empty($images['Stock Transfer']['content'])) {
+                $stock_transfer = $images['Stock Transfer']['content'];
+                $stock_transfer_filename = $images['Stock Transfer']['filename'] ?? null;
 
-            $stock_transfer_filename = isset($images['Stock Transfer']['filename']) ? $images['Stock Transfer']['filename'] : null;
+            } elseif (!empty($images['POD']['content'])) {
+                $stock_transfer = $images['POD']['content'];
+                $stock_transfer_filename = $images['POD']['filename'] ?? null;
+
+            } else {
+                $stock_transfer = null;
+                $stock_transfer_filename = null;
+            }
 
             $updateField = [
                 "pl_proof" => $sales_invoice,
@@ -373,7 +380,7 @@ class TransactionController extends Controller
                 "pl_receive_by" => $enteredName,
                 "stage_id" => 7,
                 "pl_completion_time" => $actualTime,
-                // "pl_request_status" => $newStatus,
+                "pl_request_status" => $newStatus,
                 "container_number" => $containerNumber,
                 
             ];
@@ -875,6 +882,11 @@ class TransactionController extends Controller
 
     private function resolveMilestoneCode3($type, $requestNumber, $serviceType)
     {
+        $transportMode = is_array($type['transport_mode']) ? $type['transport_mode'][0] : $type['transport_mode'];
+         if ($type['dispatch_type'] == "ot" && $type['pl_request_no'] == $requestNumber && $transportMode == 1) {
+             Log::info("🚚 Entered TEDOT branch for land transport");
+            return "TEDOT";
+        }
        
         if ($type['dispatch_type'] == "ot" && $type['pl_request_no'] == $requestNumber && $serviceType == 1) {
             return "ELOT";

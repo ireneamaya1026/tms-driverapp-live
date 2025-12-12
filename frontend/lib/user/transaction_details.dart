@@ -103,9 +103,9 @@ class _TransactionDetailsState extends ConsumerState<TransactionDetails> {
     final type = widget.transaction?.dispatchType;
     final title = type == 'dt' ? 'Consignee' : 'Shipper';
     if(isFreightFirst){
-      return ['Yard/Port', title];
+      return ['Market', title];
     } else {
-      return [title, 'Yard/Port'];
+      return [title, 'Market'];
     }
       
   }
@@ -446,7 +446,8 @@ Future<void> _fetchTransactionDetails() async {
                     ],
                   ),
                 ),
-
+                
+                if(transaction?.landTransport != "transport")
                 Container(
                   padding: const EdgeInsets.all(12.0),
                   child: Row(
@@ -484,6 +485,8 @@ Future<void> _fetchTransactionDetails() async {
                     ],
                   ),
                 ),
+                
+                if(transaction?.landTransport != "transport")
                 Container(
                   padding: const EdgeInsets.all(12.0),
                   child: Row(
@@ -499,7 +502,6 @@ Future<void> _fetchTransactionDetails() async {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           // Space between label and value
-                          
                           Text(
                             "Freight BL Number",
                             style: AppTextStyles.caption.copyWith(
@@ -507,6 +509,7 @@ Future<void> _fetchTransactionDetails() async {
                               color: mainColor,
                             ),
                           ),
+                          if(transaction?.landTransport != "transport")
                           Text(
                             (transaction?.freightBlNumber?.isNotEmpty ?? false)
                               ?transaction!.freightBlNumber! : '—',
@@ -521,6 +524,8 @@ Future<void> _fetchTransactionDetails() async {
                     ],
                   ),
                 ),
+                
+                if(transaction?.landTransport != "transport")
                 Container(
                   padding: const EdgeInsets.all(12.0),
                   child: Row(
@@ -536,7 +541,7 @@ Future<void> _fetchTransactionDetails() async {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           // Space between label and value
-                          
+
                           Text(
                             "Container Number",
                             style: AppTextStyles.caption.copyWith(
@@ -947,7 +952,7 @@ Future<void> _fetchTransactionDetails() async {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-        'Yard/Port Documents',
+        'Market Documents',
           style: AppTextStyles.body.copyWith(
             color: mainColor,
           )

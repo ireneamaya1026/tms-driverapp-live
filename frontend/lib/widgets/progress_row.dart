@@ -197,9 +197,9 @@ class ProgressRow extends StatelessWidget {
           return null;
           }
 
-    if(transaction.freightForwarderName!.isEmpty) {
-      return "Associated Freight Forwarding Vendor has not yet been assigned.";
-    }
+    if(transaction.landTransport != "transport" && (transaction.freightForwarderName!.isEmpty)) {
+        return "Associated Freight Forwarding Vendor has not yet been assigned.";
+      }
 
     // ✅ If FF stage is expected but temporarily missing, skip validation
     if (requestNumber == transaction.deRequestNumber &&
@@ -214,8 +214,8 @@ class ProgressRow extends StatelessWidget {
           }
 
 
-      if (requestNumber == transaction.plRequestNumber &&
-          transaction.deRequestStatus != "Completed" &&  transaction.deRequestStatus != "Backload") {
+      if (transaction.landTransport != "transport" && (requestNumber == transaction.plRequestNumber &&
+          transaction.deRequestStatus != "Completed" &&  transaction.deRequestStatus != "Backload")) {
         return "Delivery Empty should be completed first.";
       }
 

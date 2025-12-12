@@ -129,8 +129,8 @@ Future<void> _fetchTransactionTransactions() async {
 
    print("Land Transport: ${transaction.landTransport}");
 
-      if (transaction.landTransport != "transport" && requestNumber == transaction.plRequestNumber &&
-          transaction.deRequestStatus != "Completed" &&  transaction.deRequestStatus != "Backload") {
+      if (transaction.landTransport != "transport" && (requestNumber == transaction.plRequestNumber &&
+          transaction.deRequestStatus != "Completed" &&  transaction.deRequestStatus != "Backload")) {
         return "Delivery Empty should be completed first.";
       }
 
@@ -140,7 +140,7 @@ Future<void> _fetchTransactionTransactions() async {
         }
       }
 
-      if(transaction.landTransport != "transport" && transaction.freightForwarderName!.isEmpty) {
+      if(transaction.landTransport != "transport" && (transaction.freightForwarderName!.isEmpty)) {
         return "Associated Freight Forwarding Vendor has not yet been assigned.";
       }
 
@@ -280,6 +280,7 @@ Future<void> _fetchTransactionTransactions() async {
                         ],
                       ),
                       const SizedBox(height: 8),
+                      if(transaction?.landTransport != "transport")
                       Row(
                         children: [
                           const SizedBox(width: 8),
@@ -381,9 +382,12 @@ Future<void> _fetchTransactionTransactions() async {
                     ],
                   ),
                 ), // ⬅️ Added progress indicator above content
+                if(transaction?.landTransport != "transport")
                 Container(
                   // color: Colors.green[500], // Set background color for this section
+                  
                   padding: const EdgeInsets.all(8.0),
+                  
                   child: Text(
                     "Freight and Container Info", // Section Title
                     style: AppTextStyles.body.copyWith(
@@ -392,6 +396,7 @@ Future<void> _fetchTransactionTransactions() async {
                     ),
                   ),
                 ),
+                if(transaction?.landTransport != "transport")
                 Container(
                   padding: const EdgeInsets.all(16.0), // Add padding inside the container
                   decoration: BoxDecoration(
@@ -626,16 +631,33 @@ Future<void> _fetchTransactionTransactions() async {
                           borderRadius: BorderRadius.circular(30.0),
                         ),
                       ),
-                      child: Text(
-                        "Next",
-                        style: AppTextStyles.body.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Next",
+                            style: AppTextStyles.body.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.center,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                          ),
+                          const SizedBox(width: 8),
+                          if(!isLoaded)...[
+                            const SizedBox(
+                              width: 20,
+                              height: 20,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                valueColor: AlwaysStoppedAnimation(Colors.white),
+                              ),
+                            ),
+                          ]
+                        ],
+                      ) 
                     ),
                   ),
                 ],

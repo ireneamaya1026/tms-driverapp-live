@@ -26,8 +26,8 @@ use Ripcord\Ripcord;
 class AuthenticationController extends Controller
 {
 
-    protected $db = 'jralejandria-alpha-dev-yxe1-production-alpha-24944074';
-    protected $url = "https://alpha-yxe.odoo.com//jsonrpc";
+    protected $db = 'odootms-tms-car-da-tms-car-da-prod-26358238';
+    protected $url = "https://odootms-tms-car-da.odoo.com/jsonrpc";
 
     public function getOdooUsers()
     {

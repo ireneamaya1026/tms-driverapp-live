@@ -234,7 +234,7 @@ class _AboutMeScreenPageState extends ConsumerState<AboutMeScreen>{
                           height: 120,
                         )
                       : Image.asset(
-                          'assets/xlogo.png',
+                          'assets/agri_logo.png',
                           fit: BoxFit.cover,
                           width: 120,
                           height: 120,

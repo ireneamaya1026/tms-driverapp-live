@@ -129,6 +129,9 @@ class Transaction {
   final String? salesInvoice;
   final String? salesInvoiceFilename;
 
+  final String? routeType;
+  final String? originPort;
+
   // final String? completeAddress ;
 
 
@@ -245,6 +248,8 @@ class Transaction {
      this.salesInvoice,
      this.salesInvoiceFilename,
     this.isReassigned = false,
+    this.routeType,
+    this.originPort,
   });
 
   factory Transaction.fromJson(Map<String, dynamic> json) {
@@ -287,8 +292,9 @@ class Transaction {
                         ? _extractName(json['consignee_contact_id'])
                         : _extractName(json['consignee_id'])),
 
-      originAddress: json['origin_port_terminal_address'] ?? 'Unknown Origin Address',  // Provide a default value
+      originAddress: json['origin_port'] ?? 'Unknown Origin Address',  // Provide a default value
       destinationAddress: json['destination_port_terminal_address'] ?? 'Unknown Destination Address',  // Provide a
+      originPort: json['origin_port'] ?? 'Unknown Origin Port',
 
                  
       originContainerYard: json['origin_container_location'].toString(),
@@ -396,7 +402,7 @@ class Transaction {
         ? [DriverReassignment.fromJson(json['reassigned'] as Map<String, dynamic>)]
         : [],
 
-        
+        routeType: json['route_type'].toString(),
 
 
 
@@ -445,7 +451,7 @@ class Transaction {
 
 
   Transaction copyWith({String? name, String? destination,String? requestNumber,String? origin,String? requestStatus,status, bool? isAccepted, String? truckPlateNumber, String? destinationAddress, String? originAddress, String? rejectedTime, String? completedTime, String? assignedDate, String? freightBookingNumber,
-   List<DriverReassignment>? reassigned,  bool? isReassigned}) {
+   List<DriverReassignment>? reassigned,  bool? isReassigned, String? landTransport, String? routeType}) {
     return Transaction(
       id: id,
       name: name ?? this.name,
@@ -570,7 +576,10 @@ class Transaction {
       salesInvoice: salesInvoice,
       salesInvoiceFilename: salesInvoiceFilename,
 
-      isReassigned: isReassigned
+      isReassigned: isReassigned,
+
+      routeType: routeType,
+      originPort:originPort
       
     );
   }

@@ -347,6 +347,7 @@ class _AllBookingPageState extends ConsumerState<AllBookingScreen>{
                                       maxLines: 2,
                                     ),
                                     const SizedBox(height: 8),
+                                    if(item.landTransport == "transport")
                                     Row(
                                       children: [
                                         Text(

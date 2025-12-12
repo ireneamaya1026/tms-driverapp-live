@@ -102,7 +102,7 @@ Map<String, String> getCompletedTransactionDatetime(Transaction tx) {
 
   String? rawDateTime;
 
-if (tx.requestStatus == 'Completed') {
+if (tx.requestStatus == 'Completed' || tx.requestStatus == 'Ongoing') {
   rawDateTime = tx.completedTime?.isNotEmpty == true
       ? tx.completedTime
       : milestone?.actualDatetime ?? tx.backloadConsolidation?.consolidatedDatetime ?? tx.writeDate;

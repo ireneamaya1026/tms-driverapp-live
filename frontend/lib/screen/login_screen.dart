@@ -151,7 +151,7 @@ class LoginScreenState extends ConsumerState<LoginScreen> {
                   Positioned.fill(
                     child: Center(
                       child: Image.asset(
-                        'assets/Yello X white.png',
+                        'assets/agri_logo.png',
                         width: 250, // Adjust size of the top image
                         height: 250,
                         fit: BoxFit.contain,

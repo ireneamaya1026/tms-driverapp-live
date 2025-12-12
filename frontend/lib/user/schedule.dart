@@ -72,10 +72,10 @@ class _ScheduleState extends ConsumerState<ScheduleScreen> {
         },
         'transport':{
           'Full Container Load': {
-            'pl': {'delivery': 'TCLOT', 'pickup': 'TTEOT'},
+            'pl': {'delivery': 'TCLOT', 'pickup': 'TTEOT', 'email': 'TEDOT'},
           },
           'Less-Than-Container Load': {
-            'pl': {'delivery': 'TCLOT', 'pickup': 'TTEOT'},
+            'pl': {'delivery': 'TCLOT', 'pickup': 'TTEOT', 'email': 'TEDOT'},
           },
         }
 
