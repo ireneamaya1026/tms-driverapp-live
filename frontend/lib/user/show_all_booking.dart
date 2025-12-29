@@ -246,9 +246,9 @@ class _AllBookingPageState extends ConsumerState<AllBookingScreen>{
                 "Assigned",
               ].contains(tx.requestStatus);
 
-              final notCancelled = tx.stageId != "Cancelled";
+              final notCancelled = tx.stageId == "Cancelled";
 
-              if (!isOngoing || !notCancelled) return false;
+              if (!isOngoing || notCancelled) return false;
 
               // Safely parse the string to DateTime
               try {

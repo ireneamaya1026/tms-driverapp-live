@@ -1071,7 +1071,7 @@ Future<void> _fetchHistoryDetails() async {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Port of Origin",
+                  "Market",
                   style: AppTextStyles.subtitle.copyWith(
                     color: Colors.black,
                     fontWeight: FontWeight.bold

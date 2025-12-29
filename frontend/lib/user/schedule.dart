@@ -57,7 +57,8 @@ class _ScheduleState extends ConsumerState<ScheduleScreen> {
     final serviceType = transaction.serviceType;
     final dispatchId = transaction.id;
     final requestNumber = transaction.requestNumber;
-     final transportMode = transaction.landTransport;
+    final transportMode =
+    (transaction.landTransport?.trim().toLowerCase() ?? 'transport');
 
     final fclPrefixes = {
       'ot': {
@@ -357,7 +358,7 @@ class _ScheduleState extends ConsumerState<ScheduleScreen> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
                   child: Image.asset(
-                    'assets/Freight Forwarding.jpg',
+                    'assets/sched.png',
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -501,66 +502,66 @@ class _ScheduleState extends ConsumerState<ScheduleScreen> {
                 
               ),
               const SizedBox(height: 20),
-              if(widget.transaction?.plRequestNumber == widget.transaction?.requestNumber || widget.transaction?.peRequestStatus == widget.transaction?.requestNumber)
+              // if(widget.transaction?.plRequestNumber == widget.transaction?.requestNumber || widget.transaction?.peRequestStatus == widget.transaction?.requestNumber)
 
-              Text (
-                "Optional",
-                style: AppTextStyles.caption.copyWith(
-                  fontStyle: FontStyle.italic,
-                  color: darkerBgColor,
-                ),
-              ),
+              // Text (
+              //   "Optional",
+              //   style: AppTextStyles.caption.copyWith(
+              //     fontStyle: FontStyle.italic,
+              //     color: darkerBgColor,
+              //   ),
+              // ),
               
-              if(widget.transaction?.plRequestNumber == widget.transaction?.requestNumber|| widget.transaction?.peRequestNumber == widget.transaction?.requestNumber)...[
-              Column (
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                        onPressed: (hasActualDatetime || _isLoading) ? null : _sendEmail,
-  style: ElevatedButton.styleFrom(
-    backgroundColor: (hasActualDatetime || _isLoading)
-        ? Colors.grey
-        : mainColor,
-  ),
-                      child:  _isLoading
-                        ? const SizedBox(
-                            width: 22,
-                            height: 22,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 2.5,
-                              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                            ),
-                          )
-                      : Row (
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Icon(
-                            Icons.notifications_active,
-                            color: Colors.white,
-                            size: 20,
-                          ),
-                          const SizedBox(width: 8), // Space between icon and text
-                          Text(
-                            widget.transaction?.dispatchType == 'ot' ? "Notify Shipper" : "Notify Consignee",
-                            style: AppTextStyles.body.copyWith(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            textAlign: TextAlign.center,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                          ),
-                        ]
-                      )
+  //             if(widget.transaction?.plRequestNumber == widget.transaction?.requestNumber|| widget.transaction?.peRequestNumber == widget.transaction?.requestNumber)...[
+  //             Column (
+  //               mainAxisSize: MainAxisSize.min,
+  //               children: [
+  //                 SizedBox(
+  //                   width: double.infinity,
+  //                   child: ElevatedButton(
+  //                       onPressed: (hasActualDatetime || _isLoading) ? null : _sendEmail,
+  // style: ElevatedButton.styleFrom(
+  //   backgroundColor: (hasActualDatetime || _isLoading)
+  //       ? Colors.grey
+  //       : mainColor,
+  // ),
+  //                     child:  _isLoading
+  //                       ? const SizedBox(
+  //                           width: 22,
+  //                           height: 22,
+  //                           child: CircularProgressIndicator(
+  //                             strokeWidth: 2.5,
+  //                             valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+  //                           ),
+  //                         )
+  //                     : Row (
+  //                       mainAxisSize: MainAxisSize.min,
+  //                       children: [
+  //                         const Icon(
+  //                           Icons.notifications_active,
+  //                           color: Colors.white,
+  //                           size: 20,
+  //                         ),
+  //                         const SizedBox(width: 8), // Space between icon and text
+  //                         Text(
+  //                           widget.transaction?.dispatchType == 'ot' ? "Notify Shipper" : "Notify Consignee",
+  //                           style: AppTextStyles.body.copyWith(
+  //                             color: Colors.white,
+  //                             fontWeight: FontWeight.bold,
+  //                           ),
+  //                           textAlign: TextAlign.center,
+  //                           overflow: TextOverflow.ellipsis,
+  //                           maxLines: 1,
+  //                         ),
+  //                       ]
+  //                     )
                       
-                    ),
-                  )
-                ],
-              ), 
-              ],
-              const SizedBox(height: 10),
+  //                   ),
+  //                 )
+  //               ],
+  //             ), 
+  //             ],
+  //             const SizedBox(height: 10),
 
               // Text (
               //   "Note: Schedule is subject to change based on unforeseen circumstances. Please stay updated through your notifications.",

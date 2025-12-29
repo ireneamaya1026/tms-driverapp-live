@@ -10,7 +10,7 @@ final authServiceProvider = Provider<AuthService>((ref) => AuthService());
 class AuthService {
   final _dio = Dio(
     BaseOptions(
-      baseUrl: 'https://tms-driver-app.gothong.com/api',
+      baseUrl: 'https://tms-driver-app-beta.gothong.com/api',
       headers: {
         'Accept': 'application/json',
       },

@@ -139,7 +139,7 @@ class _TransactionScreenState extends ConsumerState<TransactionScreen> {
                   children: [
                     Positioned.fill(
                       child: Image.asset(
-                        'assets/New YXE Drive.jpg',
+                        'assets/agri_bg.jpg',
                         fit: BoxFit.cover,
                       ),
                     ),

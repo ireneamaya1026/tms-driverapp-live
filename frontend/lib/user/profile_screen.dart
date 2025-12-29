@@ -122,7 +122,7 @@ class _ProfileScreenPageState extends ConsumerState<ProfileScreen>{
                             height: 120,
                           )
                         : Image.asset(
-                            'assets/agri_logo.png',
+                            'assets/agri_1.png',
                             fit: BoxFit.cover,
                             width: 120,
                             height: 120,

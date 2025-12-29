@@ -66,7 +66,7 @@ class _HomepageScreenState extends ConsumerState<HomepageScreen> {
     {
       "title": "Start Driving Smarter Today.",
       "subtitle": "From Booking to Delivery — Seamless",
-      "image": "assets/hand-drawn-transportation-truck-with-delivery-man.png",
+      "image": "assets/4.png",
       "color": "#FBC926"
     },
     {
@@ -78,13 +78,13 @@ class _HomepageScreenState extends ConsumerState<HomepageScreen> {
     {
       "title": "Loads at your fingertips.",
       "subtitle": "Browse, accept, and deliver — all in one app",
-      "image": "assets/box-truck-with-delivery-man-standing-it-vector-illustration.png",
+      "image": "assets/3.png",
       "color": "#FBC926"
     },
     {
       "title": "All your Drivers need. In One App.",
       "subtitle": "Booking, tracking, payments, and support.",
-      "image": "assets/delivery-truck-boxes-with-isometric-style.png",
+      "image": "assets/2.png",
       "color": "#2D906F"
     },
   ];
@@ -394,7 +394,7 @@ class _HomepageScreenState extends ConsumerState<HomepageScreen> {
                                                           maxLines: 2,
                                                         ),
                                                         const SizedBox(height: 8),
-                                                        if(item.landTransport != "transport")
+                                                        if(item.landTransport == "transport")
                                                         Row(
                                                           
                                                           children: [

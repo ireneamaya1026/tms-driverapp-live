@@ -142,7 +142,7 @@ class LoginScreenState extends ConsumerState<LoginScreen> {
                         height: MediaQuery.of(context).size.height * 0.4,
                         width: double.infinity,
                         child: Image.asset(
-                          'assets/Freight Forwarding.jpg', // Replace with your background image
+                          'assets/agri_bg.jpg', // Replace with your background image
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -151,7 +151,7 @@ class LoginScreenState extends ConsumerState<LoginScreen> {
                   Positioned.fill(
                     child: Center(
                       child: Image.asset(
-                        'assets/agri_logo.png',
+                        'assets/agri_1.png',
                         width: 250, // Adjust size of the top image
                         height: 250,
                         fit: BoxFit.contain,

@@ -19,7 +19,7 @@
     <application
         android:usesCleartextTraffic="true"
         android:requestLegacyExternalStorage="true"
-        android:label="TMS"
+        android:label="TMS:Beta"
         android:name="${applicationName}"
         android:icon="@mipmap/agri_logo"
         

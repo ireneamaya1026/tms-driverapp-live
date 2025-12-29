@@ -87,7 +87,7 @@ class HomePage extends ConsumerWidget {
         appBar: AppBar(
           iconTheme: const IconThemeData(color: mainColor),
           // title: Image.asset(
-          //   'assets/agri_logo.png',
+          //   'assets/agri_1.png',
           //   height: 40,
           // ),
           backgroundColor: const Color.fromARGB(255, 255, 255, 255),
@@ -120,7 +120,7 @@ class HomePage extends ConsumerWidget {
                           Row(
                             children: [
                               Image.asset(
-                                'assets/agri_logo.png',
+                                'assets/agri_1.png',
                                 width: 50,
                                 height: 50,
                               ),
@@ -273,7 +273,7 @@ class HomePage extends ConsumerWidget {
                               height: 50,
                             )
                           : Image.asset(
-                              'assets/agri_logo.png',
+                              'assets/agri_1.png',
                               fit: BoxFit.cover,
                               width: 50,
                               height: 50,

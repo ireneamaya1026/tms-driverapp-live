@@ -69,7 +69,7 @@ List<String> getUploadLimit(){
       labels[6],
 
     ];
-  } else if (widget.transaction?.plRequestNumber == requestNumber && widget.transaction?.plRequestStatus == "Assigned" && widget.transaction?.landTransport != "transport" ){
+  } else if (widget.transaction?.plRequestNumber == requestNumber && widget.transaction?.plRequestStatus == "Assigned" && widget.transaction?.landTransport == "transport" ){
     print('plRequestNumber: ${widget.transaction?.plRequestNumber}');
     return [
       labels[6],

@@ -781,6 +781,7 @@ Future<void> _fetchTransactionDetails() async {
                 
                   ],
                 ),
+                if(transaction?.landTransport != "transport")
                 SizedBox(
                         height: 300,
                         child: ClipRRect(

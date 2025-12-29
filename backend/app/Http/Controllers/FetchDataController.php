@@ -20,10 +20,10 @@ use Illuminate\Support\Facades\Cache;
 
 class FetchDataController extends Controller
 {
-    protected $url = "https://odootms-tms-car-da.odoo.com";
-    protected $db = 'odootms-tms-car-da-tms-car-da-prod-26358238';
-    // protected $odoo_url = "https://tms-driver-app.gothong.com/odoo/jsonrpc";
-    protected $odoo_url = "https://odootms-tms-car-da.odoo.com/jsonrpc";
+    protected $url = "https://gsprodev-pd-agri.odoo.com";
+    protected $db = 'gsprodev-pd-agri-pd-agri-prod-26400546';
+    // protected $odoo_url = "https://tms-driver-app-beta.gothong.com/odoo/jsonrpc";
+    protected $odoo_url = "https://gsprodev-pd-agri.odoo.com/jsonrpc";
 
     private function authenticateDriver(Request $request)
     {
@@ -493,7 +493,7 @@ class FetchDataController extends Controller
                 "id", "de_request_status", "pl_request_status", "dl_request_status", "pe_request_status",
                 "dispatch_type", "de_truck_driver_name", "dl_truck_driver_name", "pe_truck_driver_name", "pl_truck_driver_name",
                 "de_request_no", "pl_request_no", "dl_request_no", "pe_request_no", "origin_port", "destination_port_terminal_address", "arrival_date", "delivery_date",
-                "freight_booking_number", "booking_service",
+                "freight_booking_number", "booking_service", "stage_id",
                 
                 "pickup_date", "departure_date",
                 
@@ -504,7 +504,7 @@ class FetchDataController extends Controller
                 "de_request_status", "pl_request_status", "dl_request_status", "pe_request_status",
                 "dispatch_type", 
                 "de_request_no", "pl_request_no", "dl_request_no", "pe_request_no", "origin_port", "destination_port_terminal_address", "arrival_date", "delivery_date",
-                "freight_booking_number",
+                "freight_booking_number","stage_id",
             
                 "pickup_date", "departure_date",
             
@@ -1008,13 +1008,13 @@ class FetchDataController extends Controller
                 "id", "de_request_status", "pl_request_status", "dl_request_status", "pe_request_status", "dispatch_type", "de_truck_driver_name", 
                 "dl_truck_driver_name", "pe_truck_driver_name", "pl_truck_driver_name", "de_request_no", "pl_request_no", "dl_request_no", "pe_request_no", 
                 "delivery_date", "freight_booking_number", "pickup_date",  "de_assignation_time", "pl_assignation_time", "dl_assignation_time", 
-                "pe_assignation_time", "name", "transport_mode", "service_type", "booking_service", "route_type"
+                "pe_assignation_time", "name", "transport_mode", "service_type", "booking_service", "route_type","stage_id"
             ];
 
             $fieldsToString =[
                 "de_request_status", "pl_request_status", "dl_request_status", "pe_request_status", "dispatch_type", "de_request_no", "pl_request_no", 
                 "dl_request_no", "pe_request_no",  "delivery_date", "freight_booking_number", "pickup_date",  "de_assignation_time", "pl_assignation_time", 
-                "dl_assignation_time", "pe_assignation_time", "transport_mode","route_type"
+                "dl_assignation_time", "pe_assignation_time", "transport_mode","route_type","stage_id"
             ];
             
 

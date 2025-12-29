@@ -52,8 +52,8 @@ class TransactionUtils {
 
   static String descriptionMsg(Transaction item) {
     return item.landTransport == 'transport'
-        ? 'Deliver Laden Container to Consignee'
-        : 'Pickup Laden Container from Shipper';
+        ? 'Deliver Goods to Consignee'
+        : 'Pickup Goods from Shipper';
   }
 
   static String newName(Transaction item) {
@@ -124,7 +124,7 @@ class TransactionUtils {
             requestNumber: item.dlRequestNumber,
             requestStatus: item.dlRequestStatus,
             assignedDate: item.dlAssignedDate,
-            originAddress: "Deliver Laden Container to Consignee",
+            originAddress: "Deliver Goods to Consignee",
             freightBookingNumber: item.freightBookingNumber,
             completedTime: item.dlCompletedTime,
             truckPlateNumber: item.dlTruckPlateNumber,
@@ -172,9 +172,9 @@ static List<Transaction> expandReassignments(
       case 'DE':
         return "Deliver Empty Container to Shipper";
       case 'PL':
-        return "Pickup Laden Container from Shipper";
+        return "Pickup Goods from Shipper";
       case 'DL':
-        return "Deliver Laden Container to Consignee";
+        return "Deliver Goods to Consignee";
       case 'PE':
         return "Pickup Empty Container from Consignee";
       default:

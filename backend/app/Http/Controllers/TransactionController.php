@@ -19,10 +19,10 @@ use Carbon\Carbon;
 
 class TransactionController extends Controller
 {
-    protected $url = "https://odootms-tms-car-da.odoo.com";
-    protected $db = 'odootms-tms-car-da-tms-car-da-prod-26358238';
-    // protected $odoo_url = "https://tms-driver-app.gothong.com/odoo/jsonrpc";
-    protected $odoo_url = "https://odootms-tms-car-da.odoo.com/jsonrpc";
+    protected $url = "https://gsprodev-pd-agri.odoo.com";
+    protected $db = 'gsprodev-pd-agri-pd-agri-prod-26400546';
+    // protected $odoo_url = "https://tms-driver-app-beta.gothong.com/odoo/jsonrpc";
+    protected $odoo_url = "https://gsprodev-pd-agri.odoo.com/jsonrpc";
 
 
 
@@ -1516,7 +1516,7 @@ class TransactionController extends Controller
         $waybillId = $searchResponse['result'][0]['waybill_id'] ?? null;
 
         if ($bookingIds) {
-            if ($waybillId) {
+            // if ($waybillId) {
                 $updateBookingStage = [
                     "jsonrpc" => "2.0",
                     "method" => "call",
@@ -1550,9 +1550,9 @@ class TransactionController extends Controller
                 Log::info("Updated booking stage for bookingRef {$bookingRef}, bookingId: {$bookingIds}");
 
                 return $response;
-            } else {
-                Log::warning("No found for {$bookingRef} but no waybill");
-            }
+            // } else {
+            //     Log::warning("No found for {$bookingRef} but no waybill");
+            // }
             
         } else {
             Log::warning("No booking found for bookingRef {$bookingRef}");
@@ -1763,7 +1763,7 @@ class TransactionController extends Controller
 
         $milestoneCodeToUpdate = $this->resolveMilestoneCode($type, $requestNumber, $serviceType);  
 
-        if(in_array($milestoneCodeToUpdate, ['TYOT', 'LCLOT'])) {
+        if(in_array($milestoneCodeToUpdate, ['TYOT', 'LCLOT', 'TTEOT'])) {
             $bookingRef = $type['booking_reference_no'] ?? null;
             if($bookingRef) {
                 $this->updateBookingStage1($bookingRef, $db, $uid, $odooPassword, $odooUrl);
@@ -1923,7 +1923,7 @@ class TransactionController extends Controller
             }
         }
 
-        if($milestoneCodeToUpdate === 'CYDT') {
+       if(in_array($milestoneCodeToUpdate, ['CYDT','TCLOT'])) {
             $bookingRef = $type['booking_reference_no'] ?? null;
             if($bookingRef) {
                 $this->updateBookingStage2($bookingRef, $db, $uid, $odooPassword, $odooUrl);

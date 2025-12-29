@@ -129,7 +129,7 @@ Future<void> _fetchTransactionTransactions() async {
 
    print("Land Transport: ${transaction.landTransport}");
 
-      if (transaction.landTransport != "transport" && (requestNumber == transaction.plRequestNumber &&
+      if (transaction.landTransport == "transport" && (requestNumber == transaction.plRequestNumber &&
           transaction.deRequestStatus != "Completed" &&  transaction.deRequestStatus != "Backload")) {
         return "Delivery Empty should be completed first.";
       }
@@ -140,7 +140,7 @@ Future<void> _fetchTransactionTransactions() async {
         }
       }
 
-      if(transaction.landTransport != "transport" && (transaction.freightForwarderName!.isEmpty)) {
+      if(transaction.landTransport == "transport" && (transaction.freightForwarderName!.isEmpty)) {
         return "Associated Freight Forwarding Vendor has not yet been assigned.";
       }
 
@@ -268,7 +268,7 @@ Future<void> _fetchTransactionTransactions() async {
                                   ),
                                 ),
                                 Text(
-                                  "Port of Origin",
+                                  "Market",
                                   style: AppTextStyles.caption.copyWith(
                                     color: mainColor,
                                   ),
@@ -280,7 +280,7 @@ Future<void> _fetchTransactionTransactions() async {
                         ],
                       ),
                       const SizedBox(height: 8),
-                      if(transaction?.landTransport != "transport")
+                      if(transaction?.landTransport == "transport")
                       Row(
                         children: [
                           const SizedBox(width: 8),
@@ -382,7 +382,7 @@ Future<void> _fetchTransactionTransactions() async {
                     ],
                   ),
                 ), // ⬅️ Added progress indicator above content
-                if(transaction?.landTransport != "transport")
+                if(transaction?.landTransport == "transport")
                 Container(
                   // color: Colors.green[500], // Set background color for this section
                   
@@ -396,7 +396,7 @@ Future<void> _fetchTransactionTransactions() async {
                     ),
                   ),
                 ),
-                if(transaction?.landTransport != "transport")
+                if(transaction?.landTransport == "transport")
                 Container(
                   padding: const EdgeInsets.all(16.0), // Add padding inside the container
                   decoration: BoxDecoration(

@@ -106,19 +106,21 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/agri_logo.png
-    - assets/xlogo.png
-    - assets/logowheelz2.png
+    - assets/agri_1.png
     - assets/animation/Animation - 1726470320949.json
-    - assets/Yello X.png
-    - assets/hand-drawn-transportation-truck-with-delivery-man.png
     - assets/illustrated-transport-truck-delivery-side-view-front-view-red-color-delivery-truck.png
-    - assets/box-truck-with-delivery-man-standing-it-vector-illustration.png
-    - assets/delivery-truck-boxes-with-isometric-style.png
-    - assets/Freight Forwarding.jpg
-    - assets/Yello X white.png
+    - assets/agri_1.png
+    - assets/agri_1.png
+    - assets/agri_logo_2.jpg
+    - assets/agri_1.png
+    - assets/agri_1.png
+    - assets/agri_bg.jpg
+    - assets/2.png
+    - assets/3.png
+    - assets/4.png
     - assets/New YXE Drive.jpg
-    - assets/New YXE Drive 2.jpg
+    - assets/sched.png
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

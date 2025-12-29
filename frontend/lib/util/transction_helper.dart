@@ -121,7 +121,7 @@ class TransactionHelpers {
             requestNumber: item.dlRequestNumber,
             requestStatus: item.dlRequestStatus,
             assignedDate: item.dlAssignedDate,
-            originAddress: "Deliver Laden Container to Consignee",
+            originAddress: "Deliver Goods to Consignee",
             freightBookingNumber: item.freightBookingNumber,
             completedTime: item.dlCompletedTime,
             truckPlateNumber: item.dlTruckPlateNumber,
